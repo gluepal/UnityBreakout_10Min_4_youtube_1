@@ -25,18 +25,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] mBlocks;
 
-    public AudioClip blockDestSound = null;
-    private AudioSource blockDestAudio;
-
     public void Start()
-    {
-        blockDestAudio = this.gameObject.AddComponent<AudioSource>();
-
-        LoadStage();
-
-    }
-
-    private void LoadStage()
     {
         mStages = JsonUtility.FromJson<StagesData>(stageJson.ToString());
 
@@ -79,10 +68,5 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-    }
-
-    public void WhenDestroyBlock()
-    {
-        blockDestAudio.PlayOneShot(blockDestSound);
     }
 }

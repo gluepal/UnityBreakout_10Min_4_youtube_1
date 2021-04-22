@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e5e0b2afeccd842acd4019f0434a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageNumber: 3
+  stageNumber: 1
   stageJson: {fileID: 4900000, guid: 0e85906e79702684db7ca76a6e66d531, type: 3}
   mBlocks:
   - {fileID: 1263351791052276105, guid: e98bafa2b937aa94b97dad2abfaf85d0, type: 3}
@@ -477,7 +477,6 @@ MonoBehaviour:
   - {fileID: 1263351791052276105, guid: 006097e39eca37e419de6c8c1da9430f, type: 3}
   - {fileID: 1263351791052276105, guid: 006097e39eca37e419de6c8c1da9430f, type: 3}
   - {fileID: 1263351791052276105, guid: 99fcf036921a6b6418681e0dd5c29e72, type: 3}
-  blockDestSound: {fileID: 8300000, guid: 81182f1485641dd4d9b1118b8ac83c98, type: 3}
 --- !u!4 &1112640562
 Transform:
   m_ObjectHideFlags: 0
@@ -619,7 +618,6 @@ MonoBehaviour:
   mBarSpeed: 5
   mBarMinX: -1.6
   mBarMaxX: 1.6
-  barColSound: {fileID: 8300000, guid: 15d368d28b4a6f543bc19f051e2dae6b, type: 3}
 --- !u!1 &1603263468
 GameObject:
   m_ObjectHideFlags: 0

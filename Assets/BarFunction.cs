@@ -11,14 +11,6 @@ public class BarFunction : MonoBehaviour
 
     private bool mStarted = false;
 
-    public AudioClip barColSound = null;
-    private AudioSource barColAudio;
-
-    private void Start()
-    {
-        barColAudio = this.gameObject.AddComponent<AudioSource>();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -51,10 +43,5 @@ public class BarFunction : MonoBehaviour
             mBall.GetComponent<Rigidbody2D>().AddForce(new Vector3(1.0f, 1.0f, 0) * mBallSpeed);
             mStarted = true;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        barColAudio.PlayOneShot(barColSound);
     }
 }
