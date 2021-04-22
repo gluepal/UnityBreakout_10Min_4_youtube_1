@@ -2,48 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class StageData
+{
+    public int number;
+    public int[] stage;
+}
+
+[System.Serializable]
+public class StagesData
+{
+    public StageData[] stages;
+}
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject mBall;
-    public GameObject mBar;
-    public int mBallSpeed;
-    public int mBarSpeed;
-    public float mBarMinX, mBarMaxX;
+    // For Stage
+    public int stageNumber = 0;
 
-    private bool mStarted = false;
-    
+    public TextAsset stageJson;
+    private StagesData mStages;
 
-    // Update is called once per frame
-    void Update()
+    public GameObject[] mBlocks;
+
+    public AudioClip blockDestSound = null;
+    private AudioSource blockDestAudio;
+
+    public void Start()
     {
-        if (Input.GetKey("right"))
-        {
-            if(mBarMaxX > mBar.transform.position.x)
-            {
-                mBar.transform.position = mBar.transform.position + new Vector3(1.0f * Time.deltaTime, 0) * mBarSpeed;
-            }
-            if (mStarted == false)
-            {
-                mBall.transform.position = new Vector3(mBar.transform.position.x, mBall.transform.position.y, 0);
-            }
-        }
+        blockDestAudio = this.gameObject.AddComponent<AudioSource>();
 
-        if (Input.GetKey("left"))
-        {
-            if (mBarMinX < mBar.transform.position.x)
-            {
-                mBar.transform.position = mBar.transform.position + new Vector3(-1.0f * Time.deltaTime, 0) * mBarSpeed;
-            }
-            if(mStarted == false)
-            {
-                mBall.transform.position = new Vector3(mBar.transform.position.x, mBall.transform.position.y, 0);
-            }
-        }
+        LoadStage();
 
-        if (Input.GetKey("space"))
+    }
+
+    private void LoadStage()
+    {
+        mStages = JsonUtility.FromJson<StagesData>(stageJson.ToString());
+
+        for (int i = 0; i < mStages.stages[stageNumber - 1].stage.Length; i++)
         {
-            mBall.GetComponent<Rigidbody2D>().AddForce(new Vector3(1.0f, 1.0f, 0) * mBallSpeed);
-            mStarted = true;
+            GameObject cloneBlock;
+            switch (mStages.stages[stageNumber - 1].stage[i])
+            {
+                case 1:
+                    cloneBlock = Instantiate(mBlocks[0]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                case 2:
+                    cloneBlock = Instantiate(mBlocks[1]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                case 3:
+                    cloneBlock = Instantiate(mBlocks[2]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                case 4:
+                    cloneBlock = Instantiate(mBlocks[3]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                case 5:
+                    cloneBlock = Instantiate(mBlocks[4]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                case 9:
+                    cloneBlock = Instantiate(mBlocks[8]);
+                    cloneBlock.transform.position = new Vector3(-2.2f + ((0.365f) * (i % 13)), (4.6f - ((0.25f * (i / 13)))));
+                    break;
+
+                default:
+                    break;
+            }
         }
+    }
+
+    public void WhenDestroyBlock()
+    {
+        blockDestAudio.PlayOneShot(blockDestSound);
     }
 }
